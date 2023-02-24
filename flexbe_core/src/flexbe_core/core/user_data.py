@@ -59,6 +59,9 @@ class UserData(object):
                 #   it will automatically be modified during publishing by rospy.
                 #   So to avoid hash issues, we need to return a copy.
                 value = deepcopy(value)
+        # if an attribute is requested, return the attribute
+        if len(subkeys) > 0:
+            value = self._get_attribute(value, subkeys)
         return value
 
     # dig recursively into the object to get the attribute
