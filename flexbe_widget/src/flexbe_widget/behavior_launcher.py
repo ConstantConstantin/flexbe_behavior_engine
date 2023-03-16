@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 
 import rospy
-from flexbe_msgs.msg import *
+
 from rospkg import RosPack, ResourceNotFound
-
 from flexbe_core import Logger, BehaviorLibrary
-from std_msgs.msg import String
 
-import pickle
+from std_msgs.msg import String
+from flexbe_msgs.msg import BehaviorModification, BehaviorSelection, BehaviorRequest, BEStatus, ContainerStructure
+
 import zlib
 import difflib
 import os
 import yaml
-import xml.etree.ElementTree as ET
 import threading
 
 class BehaviorLauncher(object):

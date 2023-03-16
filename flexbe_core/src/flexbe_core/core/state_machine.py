@@ -52,7 +52,7 @@ class StateMachine(State):
         self._states.append(state)
         self._labels[label] = state
         self._transitions[label] = transitions
-        self._remappings[label] = remapping or dict()
+        self._remappings[label] = remapping if remapping is not None else dict()
         # update state instance
         state.set_name(label)
         state.set_parent(self)
