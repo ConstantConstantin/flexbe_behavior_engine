@@ -12,6 +12,7 @@ env:
     - CATKIN_LINT=pedantic
     - CMAKE_ARGS=-DCMAKE_BUILD_TYPE=Release
     - PARALLEL_TESTS=1
+    - PYLINT_ARGS='--output-format=parseable --errors-only'
     - PYLINT_CHECK=true
     - ROS_REPO=main
   matrix:
