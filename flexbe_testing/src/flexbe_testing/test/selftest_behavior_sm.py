@@ -28,7 +28,7 @@ class SelftestBehaviorSM(Behavior):
 										autonomy={'done': Autonomy.Off},
 										remapping={'input_value': 'data', 'output_value': 'result'})
 			OperatableStateMachine.add('Decide Param',
-										SelftestBehaviorSM._DecisionState(outcomes=['finished', 'failed'], conditions=lambda x: 'finished' if self.value == 'correct' else 'failed'),
+										SelftestBehaviorSM._DecisionState(outcomes=['finished', 'failed'], conditions=lambda x: 'finished' if self.value == 'correct' else 'failed'),  # pylint: disable=no-member
 										transitions={'finished': 'finished', 'failed': 'failed'},
 										autonomy={'finished': Autonomy.Off, 'failed': Autonomy.Off},
 										remapping={'input_value': 'data'})

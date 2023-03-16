@@ -163,11 +163,11 @@ class OperatableStateMachine(PreemptableStateMachine):
 
     def _set_autonomy_level(self, msg):
         """ Sets the current autonomy level. """
-        if OperatableStateMachine.autonomy_level != msg.data:
-            Logger.localinfo('--> Autonomy changed to %d' % msg.data)
         if msg.data < 0:
-            self.preempt()
+            Logger.localerr('--> Invalid Autonomy Level requested: %d' % msg.data)
         else:
+            if OperatableStateMachine.autonomy_level != msg.data:
+                Logger.localinfo('--> Autonomy changed to %d' % msg.data)
             OperatableStateMachine.autonomy_level = msg.data
         self._pub.publish('flexbe/command_feedback', CommandFeedback(command="autonomy", args=[]))
 
