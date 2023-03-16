@@ -34,7 +34,7 @@ class Behavior(object):
 
         @return The complete state machine for this behavior.
         """
-        pass
+        return self._state_machine
 
     # Use those if you need them:
 
