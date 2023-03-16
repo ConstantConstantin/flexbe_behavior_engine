@@ -10,7 +10,7 @@ class UserData(object):
         self._reference = reference if reference is not None else dict()
         self._input_keys = input_keys
         self._output_keys = output_keys
-        self._remap = remap or dict()
+        self._remap = remap if remap is not None else dict()
         self._hashes = dict()
 
     def __enter__(self):

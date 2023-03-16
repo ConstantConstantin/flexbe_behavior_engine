@@ -50,7 +50,7 @@ class TestInterface(object):
     # execute
 
     def execute(self, userdata, spin_cb=None):
-        spin_cb = spin_cb or (lambda: None)
+        spin_cb = spin_cb if spin_cb is not None else (lambda: None)
         if self.is_state():
             outcome = self._execute_state(userdata, spin_cb)
         else:
