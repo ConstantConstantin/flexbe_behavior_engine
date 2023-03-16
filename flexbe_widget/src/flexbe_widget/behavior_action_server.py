@@ -2,17 +2,17 @@
 import rospy
 import actionlib
 
-from flexbe_msgs.msg import *
 from rospkg import RosPack
 from flexbe_core import BehaviorLibrary
 
 from std_msgs.msg import String, Empty
+from flexbe_msgs.msg import BehaviorExecutionAction, BehaviorExecutionFeedback, BehaviorExecutionResult
+from flexbe_msgs.msg import BehaviorModification, BehaviorSelection, BEStatus
 
 import zlib
 import difflib
 import os
 import yaml
-import xml.etree.ElementTree as ET
 
 
 class BehaviorActionServer(object):
