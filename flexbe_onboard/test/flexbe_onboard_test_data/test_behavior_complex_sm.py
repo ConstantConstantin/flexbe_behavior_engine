@@ -7,7 +7,7 @@
 # Only code inside the [MANUAL] tags will be kept.        #
 ###########################################################
 
-from flexbe_INVALID import Behavior, Autonomy, OperatableStateMachine, ConcurrencyContainer, PriorityContainer, Logger
+from flexbe_INVALID import Behavior, Autonomy, OperatableStateMachine, ConcurrencyContainer, PriorityContainer, Logger  # pylint: disable=import-error
 from flexbe_states.wait_state import WaitState
 from flexbe_states.decision_state import DecisionState
 from flexbe_states.log_state import LogState as flexbe_states__LogState
