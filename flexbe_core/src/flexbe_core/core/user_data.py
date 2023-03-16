@@ -54,7 +54,7 @@ class UserData(object):
 
     def __getattr__(self, key):
         if key.startswith('_'):
-            return object.__getattr__(self, key)
+            return object.__getattribute__(self, key)
         return self[key]
 
     def __setattr__(self, key, value):
