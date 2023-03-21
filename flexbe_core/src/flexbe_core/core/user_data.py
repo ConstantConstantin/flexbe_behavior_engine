@@ -22,6 +22,9 @@ class UserData(object):
                 raise UserDataError("Illegally modified input-only key '%s', declare it as output." % key)
 
     def __contains__(self, key):
+        # when there is a . in the key, only the first word is the actual key
+        if "." in key:
+            key = key.split(".")[0]
         if key in self._data:
             return True
         elif self._input_keys is not None and key not in self._input_keys:
@@ -30,8 +33,19 @@ class UserData(object):
             return self._remap.get(key, key) in self._reference
 
     def __getitem__(self, key):
+        # when there is a "." in the key, assume we want to read the object's attribute
+        subkeys = []
+        if "." in key:
+            keys = key.split(".")
+            key = keys[0]
+            subkeys = keys[1:]
         if key in self._data:
-            return self._data[key]
+            # if no attribute is requested, return the data right away
+            if len(subkeys) == 0:
+                return self._data[key]
+            # if an attribute is requested, return the attribute
+            else:
+                return self._get_attribute(self._data[key], subkeys)
         if key not in self:
             raise UserDataError("Key '%s' cannot be accessed, declare it as input key for read access." % key
                                 if self._input_keys is not None and key not in self._input_keys else
@@ -45,7 +59,17 @@ class UserData(object):
                 #   it will automatically be modified during publishing by rospy.
                 #   So to avoid hash issues, we need to return a copy.
                 value = deepcopy(value)
+        # if an attribute is requested, return the attribute
+        if len(subkeys) > 0:
+            value = self._get_attribute(value, subkeys)
         return value
+
+    # dig recursively into the object to get the attribute
+    def _get_attribute(self, data, subkeys):
+        if len(subkeys) > 1:
+            return self._get_attribute(getattr(data, subkeys[0]), subkeys[1:])
+        else:
+            return getattr(data, subkeys[0])
 
     def __setitem__(self, key, value):
         if self._output_keys is not None and key in self._output_keys:
