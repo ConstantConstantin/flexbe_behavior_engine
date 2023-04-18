@@ -36,6 +36,6 @@ class CalculationState(EventState):
             try:
                 self._calculation_result = self._calculation(userdata.input_value)
             except Exception as e:
-                Logger.logwarn('Failed to execute calculation function!\n%s' % str(e))
+                Logger.logwarn('Failed to execute calculation function in {}!\n{}'.format(self.name, e))
         else:
             Logger.logwarn('Passed no calculation!')
