@@ -25,11 +25,10 @@ jobs:
     strategy:
       matrix:
         include:
-          #- { ROS_DISTRO: kinetic }
           - { ROS_DISTRO: noetic }
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           lfs: true
           ssh-known-hosts: ''
