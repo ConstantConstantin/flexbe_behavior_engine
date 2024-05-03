@@ -153,7 +153,7 @@ class FlexbeOnboard(object):
                 self._pub.publish(self.status_topic, BEStatus(behavior_id=msg.behavior_checksum, code=BEStatus.FAILED))
                 Logger.logerr('Behavior execution failed!\n%s' % str(e))
                 import traceback
-                Logger.loginfo(traceback.format_exc())
+                Logger.loginfo('Traceback:\n' % str(traceback.format_exc()))
                 result = result if result is not None else "exception"  # only set result if not executed
 
             # done, remove left-overs like the temporary behavior file
