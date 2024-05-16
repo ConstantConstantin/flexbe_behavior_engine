@@ -42,8 +42,8 @@ class Logger(object):
         # only log when it's the first time or period time has passed for the logging message
         if not log_id in Logger._last_logged.keys() or \
             rospy.Time.now().to_sec() - Logger._last_logged[log_id].to_sec() > period:
-                Logger.log(text, severity)
-                Logger._last_logged.update({log_id: rospy.Time.now()})
+            Logger.log(text, severity)
+            Logger._last_logged.update({log_id: rospy.Time.now()})
 
     @staticmethod
     def local(text, severity):
